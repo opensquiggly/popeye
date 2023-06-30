@@ -44,7 +44,17 @@ features:
 
 * A normal, familar project directory structure with a source folder, documentation folder,
   build pipelines, etc.
-* Iteration 0 should include a Blazor-based web server that displays "Hello World" or some
+* Popeye should not have any process dependencies such as databases (MongoDB, Postgres, etc.),
+  external search engines (ElasticSearch, Azure Search, etc.), other cloud services
+  (Redis, RabbitMQ, etc.). Dependencies are embeddable libraries, NPM packages, etc., are fine.
+* Accessing git repositories should be done either using the git command line tool or the
+  LibGit2Sharp library.  
+  It should run in a single self-contained Docker container. It should not require Docker Compose,
+  Kubernetes, or any other multi-container orchestrator.
+* Popeye should be cloud agnostic and not depend on a specific cloud provider. It should run
+  equally well on AWS, Azure, Google Cloud, Digital Ocean, Linode, or any other cloud provider,
+  or even on-premise.  
+* Iteration 0 should include a Blazor-based web server UI that displays "Hello World" or some
   other simple proof-of-concept welcome message.
 * The Blazor web server implemented in Iteration 0 should be able to be built upon with a 
   standard development workflow, culminating in a simple code search web server that looks
@@ -80,6 +90,10 @@ features:
   project that uses Popeye. If we do add clusting capabilities later, we will probably do so
   using either Orleans or Akka.NET. Our current development roadmap should be done with this
   in mind and attempt to be structured in a way that would make clustering possible in the future.
+* In addition to a web UI, Popeye should provide a REST API for clients to use. As with the user
+  identity manage, the REST API calls will not be authenticated and will happily serve data to
+  any caller than can reach the URL.
+* Past the MVP, we may consider adding GraphQL support.    
 
 In summary, Popeye should be a simple veneer around the Spinach code search library that provides
 the user with a simple but fast regular-expression based code search engine for their projects.
